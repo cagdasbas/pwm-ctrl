@@ -1,0 +1,16 @@
+[Unit]
+Description=PWM Fan Speed Control
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/sysconfig/pwm.env
+WorkingDirectory=/opt/pwm/
+ExecStart=/opt/pwm/venv/bin/python -m pwm --duty $DUTY --pwm-pin $PWM_PIN
+Restart=always
+RestartSec=10
+PrivateTmp=true
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
